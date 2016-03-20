@@ -9,19 +9,20 @@ angular.module('plotlets.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginCtrl', ['$scope','$http','md5','$location',function($scope,$http,md5,$location) {
+.controller('LoginCtrl', ['$rootScope','$scope','$http','md5','$location',function($rootScope,$scope,$http,md5,$location) {
   $scope.login = function(){
     var password_hash = md5.createHash($scope.password || '');
     var login_data = {'email':$scope.email, 'password':password_hash};
     $http({
-      url: "https://academic-llama-k80v.imrapid.io/login",
+      url: $rootScope.api_base_url+"/api/login",
       method: 'POST',
       data: login_data
     }).then(function(result){
       console.log(result.status);
       if(result.status==200){
-        $location.path('/plots');
         window.sessionStorage.setItem('userid',$scope.email);
+        $rootScope.userid = $scope.email;
+        $location.path('/plots');
       }
     });
   }

@@ -11,13 +11,13 @@ angular.module('plotlets.signup', ['ngRoute'])
   });
 }])
 
-.controller('SignupCtrl', ['$http','$scope','md5','$location',function($http,$scope,md5,$location) {
+.controller('SignupCtrl', ['$http','$rootScope','$scope','md5','$location',function($http,$rootScope,$scope,md5,$location) {
   $scope.signup = function(){
     if($scope.password == $scope.password_confirm){
         var password_hash = md5.createHash($scope.password || '');
         var login_data = {'email':$scope.email, 'password':password_hash};
         $http({
-          url: "https://academic-llama-k80v.imrapid.io/signup",
+          url: $rootScope.api_base_url+"/api/signup",
           method: 'POST',
           data: login_data
         }).then(function(result){

@@ -6,10 +6,15 @@ angular.module('plotlets', [
   'angular-md5',
   'plotlets.plots',
   'plotlets.signup',
-  'plotlets.login'
+  'plotlets.login',
+  'plotlets.dataService'
 ]).
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider',function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/plots'});
 }]).run(function($rootScope){
-  $rootScope.alert = {display: false, message: 'all quiet on the home front'};
+  $rootScope.api_base_url = 'https://plotlets-rncrtr.c9users.io';
+  
+  if(window.sessionStorage.getItem('userid')){
+    $rootScope.userid = window.sessionStorage.getItem('userid');
+  }
 });

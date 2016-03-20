@@ -11,33 +11,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lora' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
 </head>
 <body ng-cloak>
-  <div class="nav">
-    <span><a href="#/signup">signup</a></span>
-    <span><a href="#/login">login</a></span>
-  </ul>
-
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <div class="alert" ng-show="alert.display">{{alert.message}}</div>
-  <div ng-view></div>
-
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="app-title">Plotlets</h1>
+        </div>
+        <div class="col-md-6">
+          <div class="space5 text-right">
+            <div class="inline-block" ng-show="!userid"><a href="#/signup">signup</a></div>
+            <div class="inline-block" ng-show="!userid"><a href="#/login">login</a></div>
+            <div class="inline-block" ng-show="userid">Welcome <b>{{userid}}</b></div>
+            <div class="inline-block" ng-show="userid">&nbsp;<a href="#/logout">logout</a></div>
+          </div>
+        </div>
+      </div>
+      
+      <br />
+      <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+    <div ng-view></div>
+  </div>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <!-- BOWER -->
-  <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-md5/angular-md5.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- /BOWER -->
   <!-- APP -->
   <script src="app.js"></script>
   <!-- /APP -->
   <!-- ANGULAR -->
+  <script src="data.service.js"></script>
   <script src="signup/signup-controller.js"></script>
   <script src="login/login-controller.js"></script>
   <script src="plots/plots-controller.js"></script>
