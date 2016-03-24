@@ -1,7 +1,7 @@
 // include dependencies
 var express    = require('express');
 var app        = express();
-var ip          = process.env.IP; 
+var ip      = process.env.IP; 
 var port     = process.env.PORT || 8080; // set our port
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');

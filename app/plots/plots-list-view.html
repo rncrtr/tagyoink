@@ -6,6 +6,7 @@
         <button ng-click="showPlotAddForm = true" class="btn btn-primary" ng-click="showPlotAddForm=false"><i class="fa fa-fw fa-plus"></i>Add Plot</button>
     </div>
 </div>
+<!--PLOT ADD/EDIT FORM -->
 <div class="row" ng-show="showPlotAddForm">
     <div class="col-md-12 plot-add well">
         <div class="row">
@@ -38,7 +39,8 @@
             </div>
         </div>
     </div>
-</div>{{plots}}
+</div>
+<!--/PLOT ADD/EDIT FORM -->
 <div class="row" ng-repeat="plot in plots">
     <hr />
     <div class="col-md-5">
@@ -48,9 +50,9 @@
         <div class="plot-text">{{plot.desc}}</div>
     </div>
     <div class="col-md-3 text-right">
-        <button class="btn btn-sm btn-success" ng-click="">View</button>&nbsp;
-        <button class="btn btn-sm btn-warning" ng-click="">Edit</button>&nbsp;
-        <button class="btn btn-sm btn-danger" ng-click="">Delete</button>
+        <button class="btn btn-sm btn-success" ng-click="viewPlot(plot._id)">View</button>&nbsp;
+        <button class="btn btn-sm btn-warning" ng-click="editPlot(plot._id)">Edit</button>&nbsp;
+        <button class="btn btn-sm btn-danger" ng-click="deletePlot(plot._id)">Delete</button>
     </div>
     <br />
 </div>

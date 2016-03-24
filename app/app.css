@@ -22,6 +22,18 @@ h2{
     margin-top: 5px;
 }
 
+/* cards */
+.card{border: 1px solid #cccccc; height: 140px;}
+.card-title{background: #0094ff; color: #FFF;}
+.card-title i{cursor: pointer;}
+.card-content{height: 120px; outline: none;}
+.timeframe{border: 1px solid #cccccc; height: 140px;}
+
+.chapter-title{
+  text-align: center;
+  font-weight: bold;
+}
+
 /* type */
 .app-title{font-family: 'Shadows Into Light', cursive;}
 body{font-family: 'Lora', serif;}

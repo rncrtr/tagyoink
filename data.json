@@ -1,0 +1,38 @@
+var grid = {};
+grid.rows = [];
+
+
+grid.rows[0] = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+grid.rows[1] = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+grid.rows[2] = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+grid.rows[3] = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+grid.rows[4] = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+
+
+// init row
+var newrow = {"timeframe":"","cards":[{},{},{},{},{},{}]};
+
+// with data
+var row = {
+    "timeframe":"1995",
+    "cards":[
+        {"title":"one on the run","content":"is this the one?","bgcolor":"#0094FF"},
+        {"title":"two is blue","content":"oh not you two?","bgcolor":"#0094FF"},
+        {},
+        {},
+        {},
+        {}
+    ]
+};
+
+grid.rows.push(row);
+
+//initial grid
+// 
+
+//new row
+// object, with array of (n*col) blank cards in it
+
+//new col
+// increase col count by one
+// if not on the end of the grid, move cards over one in their rows

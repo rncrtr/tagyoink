@@ -6,6 +6,10 @@ angular.module('plotlets.plots', ['ngRoute'])
   $routeProvider.when('/plots', {
     templateUrl: 'plots/plots-list-view.html',
     controller: 'PlotsCtrl'
+  })
+  .when('/plots/:id',{
+    templateUrl: 'plots/plots-detail-view.html',
+    controller: 'PlotsCtrl'
   });
 }])
 
@@ -36,28 +40,31 @@ angular.module('plotlets.plots', ['ngRoute'])
     $http({
       url: $rootScope.api_base_url+"/api/plots/",
       method: 'POST',
-      data: {'name':$scope.plot_add.name,'desc':$scope.plot_add.desc,'userid': $scope.userid};
+      data: {'name':$scope.plot_add.name,'desc':$scope.plot_add.desc,'userid': $scope.userid}
     }).then(function(result){
       if(result.status==200){
-      console.log('plot saved');
-      $scope.showPlotAddForm = false;
+        $scope.showPlotAddForm = false;
         getPlotData($scope.userid);
       }
     });
   }
   
   $scope.viewPlot = function(id){
-    var endpoint = '/api/plots/'+id;
-    var method = 'GET';
-    var params = '';
-    dataService.getRest(endpoint,method,params);
+    $location.path('/plots/'+id);
   }
   
-  $scope.editPlot = function(){
-    
+  $scope.editPlot = function(id){
+
   }
   
-  $scope.deletePlot = function(){
-    
+  $scope.deletePlot = function(id){
+    $http({
+      url: $rootScope.api_base_url+"/api/plots/"+id,
+      method: 'DELETE'
+    }).then(function(result){
+      if(result.status==200){
+
+      }
+    }); 
   }
 }]);
