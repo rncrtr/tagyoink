@@ -1,15 +1,11 @@
 module.exports = function(app){
 
 var osmosis = require('osmosis');
-var async = require('async');
 var Q = require('q');
 var YouTube = require('youtube-node');
 var youTube = new YouTube();
 youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
     
-    var url = '';
-    var link, video_url, kwstr;
-	var json = {}
 	var resultCount = 5;
 
   app.post('/api/search',function(req, res) {
