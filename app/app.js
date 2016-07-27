@@ -8,5 +8,5 @@ angular.module('tagyoink', [
 config(['$routeProvider',function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
 }]).run(function($rootScope){
-  $rootScope.api_base_url = 'https://tag-yoink-rncrtr.c9users.io';
+  $rootScope.api_base_url = 'https://afternoon-everglades-78580.herokuapp.com';
 });
