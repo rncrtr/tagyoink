@@ -13,6 +13,7 @@
     "html5-boilerplate": "~5.2.0",
     "angular-md5": "^0.1.10",
     "angular-native-dragdrop": "^1.2.0",
-    "angular-ui-sortable": "^0.14.0"
+    "angular-ui-sortable": "^0.14.0",
+    "bootstrap": "^3.3.7"
   }
 }
