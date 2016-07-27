@@ -5,10 +5,6 @@ var ip      = process.env.IP;
 var port     = process.env.PORT || 8080; // set our port
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var mongoose = require('mongoose');
-var url = 'mongodb://rncrtr:t3rnary23#@ds061370.mlab.com:61370/plotlets';
-
-mongoose.connect(url); 
 
 // parsers
 app.use(express.static(__dirname + '/app'));

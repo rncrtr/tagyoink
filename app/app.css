@@ -1,17 +1,21 @@
 /* app css stylesheet */
+*{font-family: 'Open Sans';}
 h1{
   margin: 10px 0px;
 }
 
-h2{
-  margin: 0px;
-  font-family: 'Shadows Into Light', cursive;
-}
-
+/*h2{*/
+/*  margin: 0px;*/
+/*  font-family: 'Shadows Into Light', cursive;*/
+/*}*/
+.bold{font-weight: bold;}
+.clear{clear: both;}
 /* site */
 .inline-block{display: inline-block;}
 .space5{margin: 5px 0px;}
-
+.nopad{padding-left: 0px !important; padding-right: 0px !important;}
+.pad5{padding-left: 5px !important; padding-right: 5px !important;}
+.pointer{cursor: pointer;}
 /* plot */
 .plot-title{
     font-size: 18px;
@@ -22,18 +26,52 @@ h2{
     margin-top: 5px;
 }
 
-/* cards */
-.card{border: 1px solid #cccccc; height: 140px;}
-.card-title{background: #0094ff; color: #FFF;}
-.card-title i{cursor: pointer;}
-.card-content{height: 120px; outline: none;}
-.timeframe{border: 1px solid #cccccc; height: 140px;}
+.col{border: 0px solid blue;}
+.scene-col{border: 0px solid green;}
 
+/* cards */
+.cards{border: 0px solid blue;}
+.card,.scene-card{border: 1px solid #cccccc; height: 140px;}
+.scene-card-header{background-color: #C0C0C0;}
+.card-header i{cursor: pointer;}
+.card-content{height: 120px; outline: none;}
+
+.card-options{
+  position: absolute;
+  border-left: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  width: 95%;
+  margin-left: 2.5%;
+  background: #E8E8E8;
+  height: 110px;
+}
+
+/* colors */
+.red{background-color: #DC143C;}
+.orange{background-color: #FF7F24;}
+.yellow{background-color: #FFB90F;}
+.green{background-color: #458B00;}
+.blue{background-color: #6495ED;}
+.purple{background-color: #8B008B;}
+.pink{background-color: #FF00FF;}
+.gray{background-color: #C0C0C0;}
+
+.card-colors{height: 20px;}
+.card-color-item{float: left; width: 15px; height: 15px; margin: 0px 2px; border: 1px solid #FFF;}
+
+.chapter{
+  padding-left: 5px !important; 
+  padding-right: 5px !important;
+}
 .chapter-title{
   text-align: center;
   font-weight: bold;
 }
 
+
 /* type */
 .app-title{font-family: 'Shadows Into Light', cursive;}
 body{font-family: 'Lora', serif;}
+
+div{border: 0px solid red;}

@@ -2,39 +2,31 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="plotlets" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="plotlets" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="plotlets" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="plotlets" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="tagyoink" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Plotlets</title>
-  <meta name="description" content="">
+  <title>Tag Yoink</title>
+  <meta name="keywords" content="YouTube SEO, SEO tool, video SEO, YouTube keyword finder, tag yoink">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lora' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light|Lora|Open+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
 </head>
 <body ng-cloak>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
-          <h1 class="app-title">Plotlets</h1>
-        </div>
-        <div class="col-md-6">
-          <div class="space5 text-right">
-            <div class="inline-block" ng-show="!userid"><a href="#/signup">signup</a></div>
-            <div class="inline-block" ng-show="!userid"><a href="#/login">login</a></div>
-            <div class="inline-block" ng-show="userid">Welcome <b>{{userid}}</b></div>
-            <div class="inline-block" ng-show="userid">&nbsp;<a href="#/logout">logout</a></div>
-          </div>
+        <div class="col-md-12">
+          <h1 class="app-title" style="margin: 10px 0px;">Tag Yoink</h1>
+          <h4><small>The best YouTube keywords for video SEO</small></h4>
         </div>
       </div>
-      
-      <br />
       <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
@@ -46,17 +38,14 @@
   <!-- BOWER -->
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-md5/angular-md5.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- /BOWER -->
   <!-- APP -->
   <script src="app.js"></script>
   <!-- /APP -->
   <!-- ANGULAR -->
-  <script src="data.service.js"></script>
-  <script src="signup/signup-controller.js"></script>
-  <script src="login/login-controller.js"></script>
-  <script src="plots/plots-controller.js"></script>
+  <script src="main/main-controller.js"></script>
   <!-- /ANGULAR -->
 </body>
 </html>

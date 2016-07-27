@@ -1,0 +1,10 @@
+{
+  "appId": "plotlets",
+  "apiKey": "d88c51043d6219e5f3f5b55cd7941978c33eb2227d9810ad3b99dce469e29562",
+  "public": "./",
+  "ignore": [
+    "stamplay.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

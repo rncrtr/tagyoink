@@ -1,245 +1,118 @@
-var Plot = require('./models/plot');
-var Card = require('./models/card');
-var User = require('./models/user');
-
 module.exports = function(app){
 
-	// get all the plots
-	app.get('/api/plots',function(req, res) {
-		var userid = req.body.userid;
-		Plot.find({'email':userid},function(err, plots) {
-			if (err){
-			    res.send(err);  
-			} 
-			res.json(plots);
-		});
-	});
+var osmosis = require('osmosis');
+var async = require('async');
+var Q = require('q');
+var YouTube = require('youtube-node');
+var youTube = new YouTube();
+youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
+    
+    var url = '';
+    var link, video_url, kwstr;
+	var json = {}
+	var resultCount = 5;
 
-	// create a plot (accessed at POST http://localhost:8080/plots)
-	app.post('/api/plots',function(req, res) {
-		var plot = new Plot();		// create a new instance of the Plot model
-		plot.name = req.body.name;  // set the plots name (comes from the request)
-		plot.desc = req.body.desc;
-		plot.save(function(err) {
-			if (err){
-			    res.send(err);  
-			} 
-			Plot.find(function(err, plots) {
-                if (err){
-			        res.send(err);  
-			    } 
-            res.json(plots);
-            });
-		});
-	})
-
-	app.get('/api/plots/:plot_id',function(req, res){
-		Plot.findById(req.params.plot_id, function(err, plot) {
-			if (err){
-			    res.send(err);  
-			} 
-			res.json(plot);
-		});
-	});
-
-	// update the plot with this id
-	app.put('/api/plots/:plot_id',function(req, res) {
-		Plot.findById(req.params.plot_id, function(err, plot) {
-			if (err){res.send(err);}
-			plot.name = req.body.name;
-			plot.desc = req.body.desc;
-			plot.save(function(err) {
-				if (err){res.send(err);}
-				Plot.find(function(err, plots) {
-	        if (err){res.send(err);}
-	        res.json(plots);
-	      });
-				//res.json({ message: 'Plot updated!' });
-			});
-		});
-	});
-
-	// delete the plot with this id
-	app.delete('/api/plots/:plot_id',function(req, res) {
-		Plot.remove({
-			_id: req.params.plot_id
-		}, function(err, plot) {
-			if (err){
-			    res.send(err);  
-			}
-			// get and return all the todos after you create another
-	    Plot.find(function(err, plots) {
-	        if (err){
-			    res.send(err);  
-		    }
-	      res.json(plots);
-	    });
-			//res.json({ message: 'Successfully deleted' });
-		});
-	});
-
-/// CARDS APIs
-
-	app.get('/api/cards',function(req, res) {
-		Card.find(function(err, cards) {
-			if (err){
-			    res.send(err);  
-			} 
-			res.json(cards);
-		});
-	});
-
-
-	// create a card (accessed at POST http://localhost:8080/cards)
-	app.post('/api/cards',function(req, res) {
-		var card = new Card();		// create a new instance of the Card model
-		card.name = req.body.name;  // set the cards name (comes from the request)
-		card.detail = req.body.detail;
-		card.image_url = req.body.image_url;
-		card.video_code = req.body.videocode;
-		card.plotid = req.body.plotid;
-		card.save(function(err) {
-			if (err){
-			    res.send(err);  
-			}
-			Card.find(function(err, cards) {
-    	        if (err){
-    			    res.send(err);  
-    			}
-	        res.json(cards);
-	        });
-		});
-	});
-
-	app.get('/api/cardplot/:plotid',function(req, res) {
-		Card.find({'plotid':req.params.plotid},function(err, cards) {
-			if (err){
-			    res.send(err);  
-			}
-			res.json(cards);
-		});
-	});
-
-	// get the card with that id
-	app.get('/api/cards/:card_id',function(req, res) {
-		Card.findById(req.params.card_id, function(err, card) {
-			if (err){
-			    res.send(err);  
-			}
-			res.json(card);
-		});
-	});
-
-	// update the card with this id
-	app.put('/api/cards/:card_id',function(req, res) {
-		Card.findById(req.params.card_id, function(err, card) {
-			if (err){res.send(err);}
-			card.name = req.body.name;
-			card.detail = req.body.detail;
-			card.image_url = req.body.image_url;
-			card.video_code = req.body.video_code;
-			card.plotid = req.body.plotid;
-			card.save(function(err) {
-				if (err){res.send(err);}
-				Card.find({'plotid':req.body.plotid},function(err, cards) {
-					if (err){
-			            res.send(err);  
-			        }
-					res.json(cards);
-				});
-			});
-		});
-	});
-
-	// delete the card with this id
-	app.delete('/api/cards/:plot_id/:card_id',function(req, res) {
-		Card.remove({
-			_id: req.params.card_id
-		}, function(err, card) {
-			if (err){res.send(err);}
-
-	    Card.find({'plotid':req.params.plot_id},function(err, cards) {
-    			if (err){
-    			    res.send(err);  
-    			}
-				res.json(cards);
-			});
-			//res.json({ message: 'Successfully deleted' });
-		});
-	});
-
-	app.post('/api/cards/:plotid/sort',function(req, res) {
-		var cardspos = req.body.cardspos;
-		cardspos = cardspos.split('&');
-		var index;
-		for (index = 0; index < cardspos.length; index++) {
-			(function(index) {
-			  setTimeout(function() {
-			  	var thiscard = cardspos[index];
-					var thiscard_arr = thiscard.split('=');
-					var thislen = thiscard_arr[0].length;
-					var thiskey = thiscard_arr[0].substr(0,thislen-2);
-			  	Card.findById(thiskey,function(err,card){
-						if (err){res.send(err);}
-						card.position = index;
-						card.save(function(err) {
-							if (err){res.send(err);}
-							console.log('saved model '+card._id);
-						});
-					});
-			  }, 10);
-			 })(index);
-		}
-		// find all cards for plot with newly updated positions
-		Card.find({'plotid':req.params.plot_id}).sort({position:1},function(err, cards) {
-			if (err){
-			    res.send(err);  
-			}
-			res.json(cards);
-		});
-	});
-
-	app.post('/api/signup',function(req,res){
-		var user = new User();		// create a new instance of the User model
-		user.email = req.body.email;
-		user.password = req.body.password;
-		User.find({'email':user.email},function(err, users) {
-			if (err){
-			    res.send(err);  
-			}
-			if(users.length > 0){
-				//already there, forward to login
-				console.log(users);
-			}else{
-				//save
-				user.save(function(err) {
-					if (err){
-						res.send(err);  
+  app.post('/api/search',function(req, res) {
+  	var query = req.body.query;
+  	console.log(query);
+		if (typeof query!='string'){
+			query = 'minecraft';
+		}else{
+			// var d = Q.defer();
+			// return d.promise;
+			
+			var getResults = function(query){
+				var d = Q.defer();
+				var searchresults = {};
+				youTube.search(query, resultCount, function(error, result) {
+					if (error){
+						console.log(error);
 					}else{
-						res.sendStatus(200);
+						// console.log(result);
+						searchresults = Object.keys(result).map(function(k) { return result[k] });
+						//console.log(searchresults);
+						d.resolve(searchresults);
 					}
 				});
+				
+				return d.promise;
+			};
+				
+			var getEachResult = function(searchresults){
+				var d = Q.defer();
+				var listing = [];
+				searchresults.forEach(function(item){
+				    if(typeof item=='object'){
+						if(item.length > 2){
+							listing = item;
+							console.log(listing);
+							d.resolve(listing);
+						}
+					}
+				});
+				return d.promise;
+			};
+				
+			var getEachVideoId = function(listing){
+				var d = Q.defer();
+				var listings = [];
+				listing.forEach(function(listitem){
+					console.log(listitem.id.videoId);
+					if(listitem.id.kind=='youtube#video'){
+						listings.push(listitem.id.videoId);
+					}
+				});
+				d.resolve(listings);
+				return d.promise;
+			};
+			
+			var getEachVideoKeywords = function(listings){
+				var d = Q.defer();
+				var kw = [];
+				var cnt = 0;
+				var maxCnt = 0;
+				listings.forEach(function(listitem){
+					if(listitem!='undefined'){
+						maxCnt = maxCnt + 1;
+						osmosis
+							.get('https://youtube.com/watch?v='+listitem)
+							.find('meta[name=keywords]')
+							.set({'meta':'@content'})
+							.data(function(data){
+								if(data.meta){
+									kw.push(data.meta);
+									//console.log(kw);
+								}
+								cnt = cnt+1;
+								console.log(cnt);
+								if(cnt==maxCnt){
+									console.log('resolve this, cnt is '+cnt);
+									d.resolve(kw);	
+								}else{
+									console.log('cnt is '+cnt+' and maxCnt is '+maxCnt);
+								}
+							});
+					}
+						
+				});
+
+				return d.promise;
 			}
-		});
-	});
-
-	/* GET login screen. */
-	app.post('/api/login', function(req, res) {
-		var email = req.body.email;
-		var pass = req.body.password;
-	    User.find({'email':email,'password':pass},function(err, user) {
-			if (err){
-			    res.send(err);  
-			}else{
-				user.status = 200;
-				res.json(user);
-			}
-		});
-	});
-
-
-/////////////////////////
-
+			
+			getResults(query)
+				.then(getEachResult)
+				.then(getEachVideoId)
+				.then(getEachVideoKeywords)
+				.done(function(values){
+					console.log(values);
+					return res.json(values);
+				});
+			
+	} // end if
+	
+  }); // end api
+  
+	
 	// middleware to use for all requests
 	app.use(function(req, res, next) {
 		next();
@@ -254,4 +127,6 @@ module.exports = function(app){
 	app.get('*', function(req, res) {
 	  res.sendFile('index.html',{root: __dirname+'/app'}); // load the single view file (angular will handle the page changes on the front-end)
 	});
+	
+	
 };
