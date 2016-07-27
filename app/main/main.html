@@ -1,11 +1,13 @@
-<div ng-controller="MainCtrl">
+<div class="container" ng-controller="MainCtrl">
     <div class="row">
-        <div class="col-md-3 col-md-offset-4">
-           Search:&nbsp;<input type="text" name="search" class="form-control" ng-model="q" placeholder="Enter your search term" />
-        </div>
-        <div class="col-md-1">
-            <br />
-            <button class="btn btn-primary" ng-click="search()" ng-disabled="apiLoaded">Go!</button>
+        <div class="col-md-6 col-md-offset-3">
+            <strong>Video Tags Search:</strong>&nbsp;
+            <div class="input-group input-group-lg">
+                <input type="text" name="search" class="form-control" ng-model="q" placeholder="Enter your search term" ng-keypress="handleKeypress($event)" />
+               <span class="input-group-btn">
+                   <button class="btn btn-primary btn-lg" ng-click="search()" ng-disabled="apiLoaded">Go!</button>
+               </span>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -14,7 +16,7 @@
             <img src="default.gif" />
         </div>
         <div class="col-md-6 col-md-offset-3" ng-hide="loader">
-            <h3 ng-show="keywords.length > 0">Keywords from the Top YouTube Videos</h3>
+            <h3 ng-show="keywords.length > 0">Tags from the Top YouTube Videos</h3>
             <div class="well well-lg" ng-show="keywords.length > 0">
                 <div ng-if="$index < keywords.length" ng-repeat="keyword in keywords track by $index">{{keyword}},</div>
                 <div ng-if="$index+1 == keywords.length" ng-repeat="keyword in keywords track by $index">{{keyword}}</div>
@@ -22,5 +24,10 @@
             <br />
             <small style="color: #696969" ng-show="keywords.length > 0">NOTE: You can copy and paste this list into your own video for better SEO. Theory: Borrow the brilliance of the best.</small>
         </div>
+    </div>
+</div>
+ <div class="row footer">
+    <div class="well well-sm text-center" style="margin-bottom: 0px;">
+        Made with &#10084; by Ryan Carter in Denver, CO. Thoughts, ideas, improvements? <a href="mailto:me@rncrtr.in">email me</a> or hit me up on twitter at <a href="http://twitter.com/rncrtr">@rncrtr</a>
     </div>
 </div>

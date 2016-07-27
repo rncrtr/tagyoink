@@ -10,9 +10,9 @@ youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
 
   app.post('/api/search',function(req, res) {
   	var query = req.body.query;
-  	console.log(query);
-		if (typeof query!='string'){
-			query = 'minecraft';
+  	//console.log(query);
+		if (!query || typeof query!='string'){
+			query = 'crazy ryvan';
 		}else{
 			// var d = Q.defer();
 			// return d.promise;
@@ -41,7 +41,7 @@ youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
 				    if(typeof item=='object'){
 						if(item.length > 2){
 							listing = item;
-							console.log(listing);
+							//console.log(listing);
 							d.resolve(listing);
 						}
 					}
@@ -53,7 +53,7 @@ youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
 				var d = Q.defer();
 				var listings = [];
 				listing.forEach(function(listitem){
-					console.log(listitem.id.videoId);
+					//console.log(listitem.id.videoId);
 					if(listitem.id.kind=='youtube#video'){
 						listings.push(listitem.id.videoId);
 					}
@@ -80,12 +80,12 @@ youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
 									//console.log(kw);
 								}
 								cnt = cnt+1;
-								console.log(cnt);
+								//console.log(cnt);
 								if(cnt==maxCnt){
-									console.log('resolve this, cnt is '+cnt);
+									//console.log('resolve this, cnt is '+cnt);
 									d.resolve(kw);	
 								}else{
-									console.log('cnt is '+cnt+' and maxCnt is '+maxCnt);
+									//console.log('cnt is '+cnt+' and maxCnt is '+maxCnt);
 								}
 							});
 					}
@@ -100,7 +100,7 @@ youTube.setKey('AIzaSyChvX2jm5udV2khPWiREHY0V9Os7Mtuw3w');
 				.then(getEachVideoId)
 				.then(getEachVideoKeywords)
 				.done(function(values){
-					console.log(values);
+					//console.log(values);
 					return res.json(values);
 				});
 			

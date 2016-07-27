@@ -23,7 +23,7 @@ angular.module('tagyoink.main', ['ngRoute'])
       data: {query:q}
     }).then(function(result){
       if(result.status==200){
-        console.log(result);
+        //console.log(result);
         $scope.keywords = result.data;
         $scope.keywords.forEach(function(el){
           kwlist += el;
@@ -36,16 +36,22 @@ angular.module('tagyoink.main', ['ngRoute'])
           return kwlist.indexOf(item) == pos;
         });
         var cleaned = cleanArray(dupeless);
-        console.log(cleaned);
+        //console.log(cleaned);
         $scope.keywords = cleaned;
         $scope.loader = false;
         // console.log($scope.keywords);
       }else{
-        console.log(result.status);
+        //console.log(result.status);
       }
     });
   }
   
+  $scope.handleKeypress = function(e){
+    if (e.keyCode == 13) {
+        // Do something
+        $scope.search();
+    }
+  };
   
   function cleanArray(actual) {
     var newArray = new Array();
