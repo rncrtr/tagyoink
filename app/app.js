@@ -8,6 +8,6 @@ angular.module('tagyoink', [
 config(['$routeProvider',function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
 }]).run(function($rootScope){
-  $rootScope.api_base_url = window.location.hostname;
+  $rootScope.api_base_url = 'http://'+window.location.hostname;
   //$rootScope.api_base_url = 'https://afternoon-everglades-78580.herokuapp.com';
 });
